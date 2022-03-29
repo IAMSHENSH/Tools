@@ -1,0 +1,162 @@
+" Author: shshen
+" Create Date: 2018-11-2
+" License: MIT
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 通用设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = ","      " 定义<leader>键
+set nocompatible         " 设置不兼容原始vi模式
+filetype on              " 设置开启文件类型侦测
+filetype plugin on       " 设置加载对应文件类型的插件
+set noeb                 " 关闭错误的提示
+syntax enable            " 开启语法高亮功能
+syntax on                " 自动语法高亮
+set t_Co=256             " 开启256色支持
+set cmdheight=2          " 设置命令行的高度
+set showcmd              " select模式下显示选中的行数
+set ruler                " 总是显示光标位置
+set laststatus=2         " 总是显示状态栏
+set number               " 开启绝对行号显示
+set relativenumber       " 开启相对行号显示
+set cursorline           " 高亮显示当前行
+set whichwrap+=<,>,h,l   " 设置光标键跨行
+set ttimeoutlen=0        " 设置<ESC>键响应时间
+set virtualedit=block,onemore   " 允许光标出现在最后一个字符的后面
+au BufRead,BufNewFile *.vue set filetype=html " 设置 VUE 代码高亮
+set foldmethod=indent    "基于缩进进行代码折叠
+set nofoldenable         "启动 Vim 时关闭折叠
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 代码缩进和排版
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set autoindent           " 设置自动缩进
+" set cindent              " 设置使用C/C++语言的自动缩进方式
+"set cinoptions=g0,:0,N-s,(0    " 设置C/C++语言的具体缩进方式
+" set smartindent          " 智能的选择对其方式
+" filetype indent on       " 自适应不同语言的智能缩进
+set expandtab            " 将制表符扩展为空格
+set tabstop=2            " 设置编辑时制表符占用空格数
+set shiftwidth=2         " 设置格式化时制表符占用空格数
+set softtabstop=2        " 设置4个空格为制表符
+set smarttab             " 在行和段开始处使用制表符
+set nowrap               " 禁止折行
+set backspace=2          " 使用回车键正常处理indent,eol,start等
+set sidescroll=10        " 设置向右滚动字符数
+set nofoldenable         " 禁用折叠代码
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 代码补全
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set wildmenu             " vim自身命名行模式智能补全
+set completeopt-=preview " 补全时不显示窗口，只显示补全列表
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 搜索设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hlsearch            " 高亮显示搜索结果
+set incsearch           " 开启实时搜索功能
+set ignorecase          " 搜索时大小写不敏感
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 缓存设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nobackup            " 设置不备份
+set noswapfile          " 禁止生成临时文件
+set autoread            " 文件在vim之外修改过，自动重新读入
+set autowrite           " 设置自动保存
+set confirm             " 在处理未保存或只读文件的时候，弹出确认
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 编码设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set langmenu=zh_CN.UTF-8
+set helplang=cn
+set termencoding=utf-8
+set encoding=utf8
+set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
+set ff=unix
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 插件列表
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+
+" 状态栏
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Typescript 语法高亮
+" Plug 'leafgarland/typescript-vim'
+" 扩展语言包
+" Plug 'sheerun/vim-polyglot'
+" 自动补全
+" Plug 'Valloric/YouCompleteMe'
+" 主题
+Plug 'junegunn/seoul256.vim'
+" 括号自动补全
+Plug 'jiangmiao/auto-pairs'
+" 注释助手
+" Plug 'scrooloose/nerdcommenter'
+" 模糊搜索 FZF 助手
+" Plug '~/.fzf'
+" Plug 'junegunn/fzf.vim'
+" 补全助手
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'honza/vim-snippets'
+" 实时显示git更改
+Plug 'airblade/vim-gitgutter'
+" GIT 操作
+Plug 'tpope/vim-fugitive'
+" 快速移动
+Plug 'easymotion/vim-easymotion'
+" 缩进线显示插件
+Plug 'Yggdroot/indentLine'
+" Markdown 主题插件
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+" 目录树插件
+Plug 'preservim/nerdtree'
+" 欢迎页面 
+Plug 'mhinz/vim-startify'
+
+call plug#end()  
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 插件配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" airline
+let g:airline_theme="onedark"
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+
+" seoul256 主题配置
+" seoul256 (dark):
+"   Range:   233 (darkest) ~ 239 (lightest)
+"   Default: 237
+let g:seoul256_background = 236
+colo seoul256
+
+" vim-gitgutter 配置
+" 配置 vim 的更新时间
+set updatetime=100
+
+
+" vim-NERDTree  配置
+" 配置箭头样式
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+autocmd VimEnter * NERDTree | wincmd p
+" 目录树宽度，但没有效果
+" let g:NERDTreeSize=20
+let g:NERDTreeHidden=0
+" 当NERDTree为剩下的唯一窗口时自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
